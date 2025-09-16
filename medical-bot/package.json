@@ -1,0 +1,24 @@
+{
+  "name": "medical-bot",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ts-node src/bot.ts",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.5",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "@types/node": "^24.2.0",
+    "dotenv": "^17.2.1",
+    "pg": "^8.16.3",
+    "telegraf": "^4.16.3"
+  }
+}

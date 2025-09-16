@@ -1,0 +1,12 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "bot_user",
+    "password": "2957288am",
+    "database": "medical_bot",
+    "entities": [
+        "src/entities/*.ts"
+    ],
+    "synchronize": true
+}
