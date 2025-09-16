@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Консультации пациентов</title>
+</head>
+<body>
+  <ul id="questions"></ul>
+  <script>
+    fetch('/consultations/${id}/reply')
+      .then(r => r.json())
+      .then(questions => {
+        const list = document.getElementById('questions');
+        questions.forEach(q => {
+          const li = document.createElement('li');
+          li.textContent = `${q.username || 'Аноним'}: ${q.message}`;
+          list.appendChild(li);
+        });
+      });
+      
+  </script>
+</body>
+</html>

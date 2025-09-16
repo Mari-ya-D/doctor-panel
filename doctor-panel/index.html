@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Панель врача</title>
+</head>
+<body>
+    <h1>Вопросы пациентов</h1>
+    <div id="consultations"></div>
+    <script>
+        async function loadConsultations() {
+            const res = await fetch('/consultations');
+            const questions = await res.json();
+            const div = document.getElementById('consultations');
+            div.innerHTML = '';
+            questions.forEach(q => {
+                div.innerHTML += `
+                  <div style="margin-bottom:16px; padding:10px; border:1px solid #ccc;">
+                    <b>${q.username || 'Без имени'} (ID: ${q.user_id})</b><br>
+                    <i>${q.created_at}</i><br>
+                    <b>Вопрос:</b> ${q.message}<br>
+                    <form onsubmit="event.preventDefault(); reply(${q.id}, this.answer.value);">
+                      <input name="answer" placeholder="Ваш ответ" style="width:80%">
+                      <button type="submit">Ответить</button>
+                    </form>
+                  </div>
+                `;
+            });
+        }
+
+        async function reply(id, answer) {
+            let res = await fetch('/consultations/' + id + '/reply', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ answer })
+            });
+            if (res.ok) {
+                alert('Ответ отправлен!');
+                loadConsultations();
+            } else {
+                alert('Ошибка!');
+            }
+        }
+
+        loadConsultations();
+    </script>
+</body>
+</html>
